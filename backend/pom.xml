@@ -8,7 +8,6 @@
   <artifactId>backend</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>backend</name>
-
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.target>1.8</maven.compiler.target>
@@ -17,7 +16,7 @@
       </properties>
 
   <dependencies>
-                                                                                    <dependency>
+    <dependency>
       <groupId>javax.xml.ws</groupId>
       <artifactId>jaxws-api</artifactId>
       <version>2.3.1</version>
@@ -28,15 +27,27 @@
       <artifactId>javax.jws-api</artifactId>
       <version>1.1</version>
       <scope>provided</scope>
-    </dependency>                            <dependency>
+    </dependency>
+    <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
       <version>5.6.15.Final</version>
-    </dependency>    <dependency>
+    </dependency>
+    <dependency>
       <groupId>org.hibernate.validator</groupId>
       <artifactId>hibernate-validator</artifactId>
       <version>6.2.5.Final</version>
-    </dependency>                            
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.5.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mindrot</groupId>
+      <artifactId>jbcrypt</artifactId>
+      <version>0.4</version>
+    </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
@@ -48,10 +59,12 @@
       <artifactId>junit-jupiter-engine</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
-    </dependency>      </dependencies>
+    </dependency>
+  </dependencies>
 
   <build>
         <plugins>
-                      </plugins>
+
+        </plugins>
   </build>
 </project>
