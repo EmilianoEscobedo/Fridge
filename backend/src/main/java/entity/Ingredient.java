@@ -17,21 +17,5 @@ public class Ingredient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "recipe_id")
-    private Recipe recipeId;
-
     private String name;
-    private Double quantity;
-    private String boughtDate;
-
-    @PrePersist
-    protected void onCreate() {
-        this.boughtDate = ZonedDateTime.now(
-                ZoneId.of("GMT-3")).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-    }
 }

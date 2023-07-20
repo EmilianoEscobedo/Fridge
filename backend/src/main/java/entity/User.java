@@ -16,13 +16,10 @@ public class User {
     private Long id;
 
     private String email;
-
     private String password;
-
     private String name;
-
     private String profileImage;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Ingredient> ingredients;
+    private List<UserIngredient> userIngredients;
 }

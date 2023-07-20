@@ -27,6 +27,5 @@ public class Recipe {
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "ingredient_id")
     )
-    private List<Ingredient> ingredients;
-
+    private List<RecipeIngredient> recipeIngredients;
 }

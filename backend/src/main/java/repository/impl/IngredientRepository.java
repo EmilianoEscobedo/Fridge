@@ -1,6 +1,7 @@
 package repository.impl;
 
 import entity.Ingredient;
+import entity.UserIngredient;
 import repository.Repository;
 import util.EntityManagerFactoryProvider;
 
@@ -52,5 +53,32 @@ public class IngredientRepository implements Repository<Ingredient, Long> {
         em.getTransaction().commit();
         em.close();
     }
-}
 
+    public void saveUserIngredient(UserIngredient userIngredient) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(userIngredient);
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public List<UserIngredient> findUserIngredientsByUserId(Long userId) {
+        EntityManager em = emf.createEntityManager();
+        List<UserIngredient> userIngredients = em.createQuery(
+                        "SELECT ui FROM UserIngredient ui WHERE ui.user.id = :userId", UserIngredient.class)
+                .setParameter("userId", userId)
+                .getResultList();
+        em.close();
+        return userIngredients;
+    }
+
+    public List<UserIngredient> findUserIngredientsByIngredientId(Long ingredientId) {
+        EntityManager em = emf.createEntityManager();
+        List<UserIngredient> userIngredients = em.createQuery(
+                        "SELECT ui FROM UserIngredient ui WHERE ui.ingredient.id = :ingredientId", UserIngredient.class)
+                .setParameter("ingredientId", ingredientId)
+                .getResultList();
+        em.close();
+        return userIngredients;
+    }
+}
