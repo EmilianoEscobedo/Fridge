@@ -1,21 +1,23 @@
-package repository;
+package repository.impl;
 
 import entity.Ingredient;
+import repository.Repository;
+import util.EntityManagerFactoryProvider;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.List;
 
-public class IngredientRepository {
+public class IngredientRepository implements Repository<Ingredient, Long> {
 
     private final EntityManagerFactory emf;
 
     public IngredientRepository() {
-        emf = Persistence.createEntityManagerFactory("default");
+        emf = EntityManagerFactoryProvider.getEntityManagerFactory();
     }
 
-    public void saveIngredient(Ingredient ingredient) {
+    @Override
+    public void save(Ingredient ingredient) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(ingredient);
@@ -23,21 +25,24 @@ public class IngredientRepository {
         em.close();
     }
 
-    public Ingredient findIngredientById(Long id) {
+    @Override
+    public Ingredient findById(Long id) {
         EntityManager em = emf.createEntityManager();
         Ingredient ingredient = em.find(Ingredient.class, id);
         em.close();
         return ingredient;
     }
 
-    public List<Ingredient> getAllIngredients() {
+    @Override
+    public List<Ingredient> findAll() {
         EntityManager em = emf.createEntityManager();
         List<Ingredient> ingredients = em.createQuery("SELECT i FROM Ingredient i", Ingredient.class).getResultList();
         em.close();
         return ingredients;
     }
 
-    public void deleteIngredientById(Long id) {
+    @Override
+    public void deleteById(Long id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         Ingredient ingredient = em.find(Ingredient.class, id);

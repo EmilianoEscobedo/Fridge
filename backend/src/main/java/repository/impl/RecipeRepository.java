@@ -1,21 +1,23 @@
-package repository;
+package repository.impl;
 
 import entity.Recipe;
+import repository.Repository;
+import util.EntityManagerFactoryProvider;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.List;
 
-public class RecipeRepository {
+public class RecipeRepository implements Repository<Recipe, Long> {
 
-    private final EntityManagerFactory emf;
+    private EntityManagerFactory emf;
 
     public RecipeRepository() {
-        emf = Persistence.createEntityManagerFactory("default");
+        emf = EntityManagerFactoryProvider.getEntityManagerFactory();
     }
 
-    public void saveRecipe(Recipe recipe) {
+    @Override
+    public void save(Recipe recipe) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(recipe);
@@ -23,21 +25,24 @@ public class RecipeRepository {
         em.close();
     }
 
-    public Recipe findRecipeById(Long id) {
+    @Override
+    public Recipe findById(Long id) {
         EntityManager em = emf.createEntityManager();
         Recipe recipe = em.find(Recipe.class, id);
         em.close();
         return recipe;
     }
 
-    public List<Recipe> getAllRecipes() {
+    @Override
+    public List<Recipe> findAll() {
         EntityManager em = emf.createEntityManager();
         List<Recipe> recipes = em.createQuery("SELECT r FROM Recipe r", Recipe.class).getResultList();
         em.close();
         return recipes;
     }
 
-    public void deleteRecipeById(Long id) {
+    @Override
+    public void deleteById(Long id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         Recipe recipe = em.find(Recipe.class, id);
@@ -48,3 +53,4 @@ public class RecipeRepository {
         em.close();
     }
 }
+

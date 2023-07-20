@@ -1,21 +1,23 @@
-package repository;
+package repository.impl;
 
 import entity.User;
+import repository.Repository;
+import util.EntityManagerFactoryProvider;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.List;
 
-public class UserRepository {
+public class UserRepository implements Repository<User, Long> {
 
     private final EntityManagerFactory emf;
 
     public UserRepository() {
-        emf = Persistence.createEntityManagerFactory("default");
+        emf = EntityManagerFactoryProvider.getEntityManagerFactory();
     }
 
-    public void createUser(User user) {
+    @Override
+    public void save(User user) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(user);
@@ -23,29 +25,24 @@ public class UserRepository {
         em.close();
     }
 
-    public User getUserById(Long id) {
+    @Override
+    public User findById(Long id) {
         EntityManager em = emf.createEntityManager();
         User user = em.find(User.class, id);
         em.close();
         return user;
     }
 
-    public List<User> getAllUsers() {
+    @Override
+    public List<User> findAll() {
         EntityManager em = emf.createEntityManager();
         List<User> users = em.createQuery("SELECT u FROM User u", User.class).getResultList();
         em.close();
         return users;
     }
 
-    public void updateUser(User user) {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        em.merge(user);
-        em.getTransaction().commit();
-        em.close();
-    }
-
-    public void deleteUser(Long id) {
+    @Override
+    public void deleteById(Long id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         User user = em.find(User.class, id);
@@ -56,4 +53,5 @@ public class UserRepository {
         em.close();
     }
 }
+
 
