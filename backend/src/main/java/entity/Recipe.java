@@ -9,6 +9,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Data
+@Table(name = "recipes")
 public class Recipe {
 
     @Id

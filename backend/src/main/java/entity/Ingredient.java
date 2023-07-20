@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 @Entity
 @NoArgsConstructor
 @Data
+@Table(name = "ingredients")
 public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +19,7 @@ public class Ingredient {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User userId;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "recipe_id")
