@@ -6,6 +6,7 @@ import util.EntityManagerFactoryProvider;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,6 +53,19 @@ public class UserRepository implements Repository<User, Long> {
         }
         em.getTransaction().commit();
         em.close();
+    }
+
+    public boolean existsById(Long id) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Long> query = em.createQuery(
+                    "SELECT COUNT(u) FROM User u WHERE u.id = :id", Long.class);
+            query.setParameter("id", id);
+            Long count = query.getSingleResult();
+            return count > 0;
+        } finally {
+            em.close();
+        }
     }
 }
 
