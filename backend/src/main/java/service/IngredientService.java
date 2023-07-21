@@ -9,4 +9,5 @@ public interface IngredientService {
     void addUserIngredient(UserIngredientRequest dto);
     boolean IngredientDoesNotExistsByName(String name);
     List<UserIngredientResponse> getAllIngredientsByUserId(Long id);
+    void deleteById(Long id);
 }

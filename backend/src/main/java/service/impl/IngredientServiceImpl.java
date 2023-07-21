@@ -43,4 +43,9 @@ public class IngredientServiceImpl implements IngredientService {
                 .map(UserIngredientResponse::new)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteById(Long id) {
+
+    }
 }
