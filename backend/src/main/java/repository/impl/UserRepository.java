@@ -1,6 +1,9 @@
 package repository.impl;
 
 import entity.User;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import repository.Repository;
 import util.EntityManagerFactoryProvider;
 
@@ -10,6 +13,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
+@ApplicationScoped
 public class UserRepository implements Repository<User, Long> {
 
     private final EntityManagerFactory emf;

@@ -2,12 +2,19 @@ package service.impl;
 
 import dto.RegisterRequest;
 import dto.UserDto;
+import dto.UserIngredientResponse;
 import entity.User;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import repository.impl.UserRepository;
 import service.UserService;
 
-public class UserServiceImpl implements UserService {
+import java.util.List;
+import java.util.stream.Collectors;
 
+@ApplicationScoped
+public class UserServiceImpl implements UserService {
+    @Inject
     UserRepository userRepository;
 
     @Override
@@ -18,6 +25,7 @@ public class UserServiceImpl implements UserService {
         UserDto userCreated = new UserDto();
         userCreated.setName(user.getName());
         userCreated.setProfileImage(user.getProfileImage());
+        userRepository.save(user);
         return userCreated;
     }
 
@@ -29,6 +37,14 @@ public class UserServiceImpl implements UserService {
         userDto.setId(user.getId());
         userDto.setName(user.getName());
         return userDto;
+    }
+
+    @Override
+    public List<UserDto> getUsers() {
+        return userRepository.findAll()
+                .stream()
+                .map(this::convertToUserDto)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -52,5 +68,13 @@ public class UserServiceImpl implements UserService {
         if (!userRepository.existsById(id))
             throw new RuntimeException("Could not find user with id " + id);
         userRepository.deleteById(id);
+    }
+
+    private UserDto convertToUserDto(User user) {
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setName(user.getName());
+        userDto.setProfileImage(user.getProfileImage());
+        return userDto;
     }
 }
