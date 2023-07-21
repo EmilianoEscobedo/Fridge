@@ -2,6 +2,7 @@ package repository.impl;
 
 import entity.Recipe;
 import entity.RecipeIngredient;
+import jakarta.enterprise.context.ApplicationScoped;
 import repository.Repository;
 import util.EntityManagerFactoryProvider;
 
@@ -10,6 +11,7 @@ import javax.persistence.EntityManagerFactory;
 import java.util.List;
 import java.util.Optional;
 
+@ApplicationScoped
 public class RecipeRepository implements Repository<Recipe, Long> {
 
     private EntityManagerFactory emf;

@@ -2,6 +2,7 @@ package repository.impl;
 
 import entity.Ingredient;
 import entity.UserIngredient;
+import jakarta.enterprise.context.ApplicationScoped;
 import repository.Repository;
 import util.EntityManagerFactoryProvider;
 
@@ -9,7 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
 import java.util.Optional;
-
+@ApplicationScoped
 public class IngredientRepository implements Repository<Ingredient, Long> {
 
     private final EntityManagerFactory emf;
