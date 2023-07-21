@@ -1,5 +1,6 @@
 package entity;
 
+import dto.RecipeDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -36,5 +37,13 @@ public class Recipe {
         this.description = description;
         this.instructions = instructions;
         this.recipeIngredients = new ArrayList<>();
+    }
+
+    public Recipe(RecipeDto dto) {
+        this.name = dto.getName();
+        this.cookingTime = dto.getCokingTime();
+        this.description = dto.getDescription();
+        this.instructions = dto.getInstructions();
+        this.recipeIngredients = dto.getIngredients();
     }
 }

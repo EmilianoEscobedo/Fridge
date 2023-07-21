@@ -6,9 +6,9 @@ import entity.Recipe;
 import java.util.List;
 
 public interface RecipeService {
-    void addRecipe(Recipe recipe);
+    void addRecipe(RecipeDto recipe);
     List<RecipeDto> getAllRecipes();
     List<RecipeDto> getRecipesByUserId(Long id);
-    boolean recipeExistsByName(String name);
-    void deleteById();
+    boolean recipeDoesNotExistsByName(String name);
+    void deleteById(Long id);
 }

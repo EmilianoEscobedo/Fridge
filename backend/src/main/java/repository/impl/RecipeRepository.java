@@ -57,6 +57,15 @@ public class RecipeRepository implements Repository<Recipe, Long> {
         em.close();
     }
 
+    public boolean existsByName(String name) {
+        EntityManager em = emf.createEntityManager();
+        Long count = em.createQuery("SELECT COUNT(r) FROM Recipe r WHERE r.name = :name", Long.class)
+                .setParameter("name", name)
+                .getSingleResult();
+        em.close();
+        return count > 0;
+    }
+
     public void saveRecipeIngredient(RecipeIngredient recipeIngredient) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
