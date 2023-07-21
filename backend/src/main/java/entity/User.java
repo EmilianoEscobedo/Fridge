@@ -20,6 +20,24 @@ public class User {
     private String name;
     private String profileImage;
 
+    public User(String email, String password, String name, String profileImage){
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.profileImage = profileImage;
+    }
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserIngredient> userIngredients;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", profileImage='" + profileImage + '\'' +
+                '}';
+    }
 }

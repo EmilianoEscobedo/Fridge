@@ -7,6 +7,7 @@ import util.EntityManagerFactoryProvider;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
+import java.util.Optional;
 
 public class UserRepository implements Repository<User, Long> {
 
@@ -26,11 +27,11 @@ public class UserRepository implements Repository<User, Long> {
     }
 
     @Override
-    public User findById(Long id) {
+    public Optional<User> findById(Long id) {
         EntityManager em = emf.createEntityManager();
         User user = em.find(User.class, id);
         em.close();
-        return user;
+        return Optional.ofNullable(user);
     }
 
     @Override

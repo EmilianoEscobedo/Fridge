@@ -8,6 +8,7 @@ import util.EntityManagerFactoryProvider;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
+import java.util.Optional;
 
 public class IngredientRepository implements Repository<Ingredient, Long> {
 
@@ -27,11 +28,11 @@ public class IngredientRepository implements Repository<Ingredient, Long> {
     }
 
     @Override
-    public Ingredient findById(Long id) {
+    public Optional<Ingredient> findById(Long id) {
         EntityManager em = emf.createEntityManager();
         Ingredient ingredient = em.find(Ingredient.class, id);
         em.close();
-        return ingredient;
+        return Optional.ofNullable(ingredient);
     }
 
     @Override
@@ -62,6 +63,15 @@ public class IngredientRepository implements Repository<Ingredient, Long> {
         em.close();
     }
 
+    public boolean existsByName(String name) {
+        EntityManager em = emf.createEntityManager();
+        Long count = em.createQuery("SELECT COUNT(i) FROM Ingredient i WHERE i.name = :name", Long.class)
+                .setParameter("name", name)
+                .getSingleResult();
+        em.close();
+        return count > 0;
+    }
+
     public List<UserIngredient> findUserIngredientsByUserId(Long userId) {
         EntityManager em = emf.createEntityManager();
         List<UserIngredient> userIngredients = em.createQuery(
@@ -80,5 +90,14 @@ public class IngredientRepository implements Repository<Ingredient, Long> {
                 .getResultList();
         em.close();
         return userIngredients;
+    }
+
+    public Long findIdByName(String name) {
+        EntityManager em = emf.createEntityManager();
+        Long id = em.createQuery("SELECT i.id FROM Ingredient i WHERE i.name = :name", Long.class)
+                .setParameter("name", name)
+                .getSingleResult();
+        em.close();
+        return id;
     }
 }

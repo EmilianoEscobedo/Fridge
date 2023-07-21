@@ -29,6 +29,14 @@ public class UserIngredient {
     private Double quantity;
 
     private String boughtDate;
+
+    public UserIngredient(User user, Ingredient ingredient, Double quantity, String boughtDate) {
+            this.user = user;
+            this.ingredient = ingredient;
+            this.quantity = quantity;
+            this.boughtDate = boughtDate;
+    }
+
     @PrePersist
     protected void onCreate() {
         this.boughtDate = ZonedDateTime.now(

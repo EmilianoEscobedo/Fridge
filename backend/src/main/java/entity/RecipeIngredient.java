@@ -24,4 +24,10 @@ public class RecipeIngredient {
     private Ingredient ingredient;
 
     private Double quantity;
+
+    public RecipeIngredient(Recipe recipe, Ingredient ingredient, Double quantity) {
+        this.recipe = recipe;
+        this.ingredient = ingredient;
+        this.quantity = quantity;
+    }
 }

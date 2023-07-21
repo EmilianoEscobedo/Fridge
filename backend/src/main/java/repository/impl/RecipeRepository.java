@@ -1,12 +1,14 @@
 package repository.impl;
 
 import entity.Recipe;
+import entity.RecipeIngredient;
 import repository.Repository;
 import util.EntityManagerFactoryProvider;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
+import java.util.Optional;
 
 public class RecipeRepository implements Repository<Recipe, Long> {
 
@@ -26,11 +28,11 @@ public class RecipeRepository implements Repository<Recipe, Long> {
     }
 
     @Override
-    public Recipe findById(Long id) {
+    public Optional<Recipe> findById(Long id) {
         EntityManager em = emf.createEntityManager();
         Recipe recipe = em.find(Recipe.class, id);
         em.close();
-        return recipe;
+        return Optional.ofNullable(recipe);
     }
 
     @Override
@@ -49,6 +51,14 @@ public class RecipeRepository implements Repository<Recipe, Long> {
         if (recipe != null) {
             em.remove(recipe);
         }
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public void saveRecipeIngredient(RecipeIngredient recipeIngredient) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(recipeIngredient);
         em.getTransaction().commit();
         em.close();
     }

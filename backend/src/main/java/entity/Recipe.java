@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,4 +29,12 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "ingredient_id")
     )
     private List<RecipeIngredient> recipeIngredients;
+
+    public Recipe(String name, Integer cookingTime, String description, String instructions) {
+        this.name = name;
+        this.cookingTime = cookingTime;
+        this.description = description;
+        this.instructions = instructions;
+        this.recipeIngredients = new ArrayList<>();
+    }
 }
