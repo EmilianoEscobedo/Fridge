@@ -1,5 +1,3 @@
-import dto.RegisterRequest;
-import service.impl.UserServiceImpl;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
