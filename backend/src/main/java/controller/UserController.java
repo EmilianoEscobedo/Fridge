@@ -1,7 +1,7 @@
 package controller;
 
-import dto.RegisterRequest;
-import dto.UserDto;
+import dto.user.RegisterRequest;
+import dto.user.UserDto;
 import service.UserService;
 import service.impl.UserServiceImpl;
 

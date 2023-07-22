@@ -1,7 +1,6 @@
 package service;
 
-import dto.RecipeDto;
-import entity.Recipe;
+import dto.recipe.RecipeDto;
 
 import java.util.List;
 

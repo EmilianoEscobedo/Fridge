@@ -1,7 +1,7 @@
 package service;
 
-import dto.RegisterRequest;
-import dto.UserDto;
+import dto.user.RegisterRequest;
+import dto.user.UserDto;
 
 import java.util.List;
 

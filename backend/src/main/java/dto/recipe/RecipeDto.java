@@ -1,4 +1,4 @@
-package dto;
+package dto.recipe;
 
 import entity.Recipe;
 import entity.RecipeIngredient;

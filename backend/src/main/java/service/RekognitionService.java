@@ -1,8 +1,8 @@
 package service;
 
 import com.amazonaws.services.rekognition.model.Image;
-import dto.TicketRequest;
-import dto.UserIngredientDto;
+import dto.ticket.TicketRequest;
+import dto.ingredient.UserIngredientDto;
 
 import java.util.List;
 

@@ -1,8 +1,7 @@
 package service.impl;
 
-import dto.RegisterRequest;
-import dto.UserDto;
-import dto.UserIngredientResponse;
+import dto.user.RegisterRequest;
+import dto.user.UserDto;
 import entity.User;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

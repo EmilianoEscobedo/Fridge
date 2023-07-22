@@ -1,9 +1,7 @@
 package controller;
 
-import dto.RegisterRequest;
-import dto.UserDto;
-import dto.UserIngredientRequest;
-import dto.UserIngredientResponse;
+import dto.ingredient.UserIngredientRequest;
+import dto.ingredient.UserIngredientResponse;
 import service.IngredientService;
 import service.impl.IngredientServiceImpl;
 

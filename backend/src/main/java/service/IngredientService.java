@@ -1,7 +1,7 @@
 package service;
 
-import dto.UserIngredientRequest;
-import dto.UserIngredientResponse;
+import dto.ingredient.UserIngredientRequest;
+import dto.ingredient.UserIngredientResponse;
 
 import java.util.List;
 

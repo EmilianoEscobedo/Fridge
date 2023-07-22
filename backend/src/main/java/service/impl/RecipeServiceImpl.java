@@ -1,6 +1,6 @@
 package service.impl;
 
-import dto.RecipeDto;
+import dto.recipe.RecipeDto;
 import entity.Recipe;
 import repository.impl.RecipeRepository;
 import service.RecipeService;

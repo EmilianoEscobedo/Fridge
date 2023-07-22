@@ -1,7 +1,7 @@
 package service.impl;
 
-import dto.UserIngredientRequest;
-import dto.UserIngredientResponse;
+import dto.ingredient.UserIngredientRequest;
+import dto.ingredient.UserIngredientResponse;
 import entity.Ingredient;
 import entity.User;
 import entity.UserIngredient;

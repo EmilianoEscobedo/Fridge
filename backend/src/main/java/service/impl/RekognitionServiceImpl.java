@@ -3,8 +3,8 @@ package service.impl;
 import com.amazonaws.services.rekognition.AmazonRekognition;
 import com.amazonaws.services.rekognition.AmazonRekognitionAsyncClientBuilder;
 import com.amazonaws.services.rekognition.model.Image;
-import dto.TicketRequest;
-import dto.UserIngredientDto;
+import dto.ticket.TicketRequest;
+import dto.ingredient.UserIngredientDto;
 import service.IngredientService;
 import service.RekognitionService;
 

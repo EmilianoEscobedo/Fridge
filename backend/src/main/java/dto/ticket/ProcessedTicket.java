@@ -1,5 +1,6 @@
-package dto;
+package dto.ticket;
 
+import dto.ingredient.UserIngredientDto;
 import lombok.Data;
 
 import java.util.List;

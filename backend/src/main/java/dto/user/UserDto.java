@@ -1,4 +1,4 @@
-package dto;
+package dto.user;
 
 import entity.User;
 import entity.UserIngredient;

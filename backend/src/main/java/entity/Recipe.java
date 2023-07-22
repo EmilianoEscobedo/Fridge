@@ -1,6 +1,6 @@
 package entity;
 
-import dto.RecipeDto;
+import dto.recipe.RecipeDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
