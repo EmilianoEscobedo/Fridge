@@ -14,14 +14,14 @@ import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class UserServiceImpl implements UserService {
-    @Inject
-    UserRepository userRepository;
+
+    UserRepository userRepository = new UserRepository();
 
     @Override
     public UserDto createUser(RegisterRequest request) {
         User user = new User(request.getEmail(), request.getPassword(),
                 request.getName());
-        request.getProfileImage().ifPresent(user::setProfileImage);
+//        request.getProfileImage().ifPresent(user::setProfileImage);
         UserDto userCreated = new UserDto();
         userCreated.setName(user.getName());
         userCreated.setProfileImage(user.getProfileImage());
@@ -60,6 +60,7 @@ public class UserServiceImpl implements UserService {
             user.setProfileImage(userDto.getProfileImage());
             updatedUser.setProfileImage(userDto.getProfileImage());
         }
+        userRepository.save(user);
         return updatedUser;
     }
 

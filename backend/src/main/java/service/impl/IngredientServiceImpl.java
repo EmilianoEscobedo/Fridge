@@ -5,7 +5,6 @@ import dto.UserIngredientResponse;
 import entity.Ingredient;
 import entity.User;
 import entity.UserIngredient;
-import jakarta.inject.Inject;
 import repository.impl.IngredientRepository;
 import repository.impl.UserRepository;
 import service.IngredientService;
@@ -14,10 +13,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class IngredientServiceImpl implements IngredientService {
-    @Inject
-    IngredientRepository ingredientRepository;
-    @Inject
-    UserRepository userRepository;
+
+    IngredientRepository ingredientRepository = new IngredientRepository();
+
+    UserRepository userRepository = new UserRepository();
 
     @Override
     public void addUserIngredient(UserIngredientRequest dto) {

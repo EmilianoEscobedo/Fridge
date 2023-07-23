@@ -1,5 +1,7 @@
 package util;
 
+import jakarta.enterprise.context.ApplicationScoped;
+
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
