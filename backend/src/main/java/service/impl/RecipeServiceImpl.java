@@ -5,20 +5,21 @@ import entity.Recipe;
 import repository.impl.RecipeRepository;
 import service.RecipeService;
 
+import javax.jws.WebService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@WebService(endpointInterface = "service.RecipeService")
 public class RecipeServiceImpl implements RecipeService {
 
     RecipeRepository recipeRepository = new RecipeRepository();
 
-    @Override
-    public void addRecipe(RecipeDto dto) {
-        Recipe newRecipe = new Recipe(dto);
+
+    public void addRecipe(RecipeDto recipe) {
+        Recipe newRecipe = new Recipe(recipe);
         recipeRepository.save(newRecipe);
     }
 
-    @Override
     public List<RecipeDto> getAllRecipes() {
         return recipeRepository.findAll()
                 .stream()
@@ -26,19 +27,17 @@ public class RecipeServiceImpl implements RecipeService {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public List<RecipeDto> getRecipesByUserId(Long id) {
+
+    public List<RecipeDto> getRecipesByUserId(Long userId) {
         return null;
     }
 
-    @Override
-    public boolean recipeDoesNotExistsByName(String name) {
-        return !recipeRepository.existsByName(name);
+    public void deleteRecipeById(Long recipeId) {
+        recipeRepository.deleteById(recipeId);
     }
 
-    @Override
-    public void deleteById(Long id) {
-        recipeRepository.deleteById(id);
+    public boolean recipeDoesNotExistsByName(String name) {
+        return !recipeRepository.existsByName(name);
     }
 
     public void handleRequest(List<RecipeDto> recipeList) {

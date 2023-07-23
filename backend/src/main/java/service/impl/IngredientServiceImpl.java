@@ -10,44 +10,42 @@ import repository.impl.IngredientRepository;
 import repository.impl.UserRepository;
 import service.IngredientService;
 
+import javax.jws.WebService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@WebService(endpointInterface = "service.IngredientService")
 public class IngredientServiceImpl implements IngredientService {
-    @Inject
-    IngredientRepository ingredientRepository;
-    @Inject
-    UserRepository userRepository;
+//    @Inject
+    IngredientRepository ingredientRepository = new IngredientRepository();
+//    @Inject
+    UserRepository userRepository = new UserRepository();
 
-    @Override
-    public void addUserIngredient(UserIngredientRequest dto) {
-        User user = userRepository.findById(dto.getUserId())
-                .orElseThrow(()-> new RuntimeException("Don't exists user with the provided id:" + dto.getUserId()));
+    public void addUserIngredient(UserIngredientRequest request) {
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(()-> new RuntimeException("Don't exists user with the provided id:" + request.getUserId()));
 
-        Ingredient ingredient = new Ingredient(dto.getName());
-        if (IngredientDoesNotExistsByName(dto.getName())) {
+        Ingredient ingredient = new Ingredient(request.getName());
+        if (IngredientDoesNotExistsByName(request.getName())) {
             ingredientRepository.save(ingredient);
         }
         ingredient.setId(ingredientRepository.findIdByName(ingredient.getName()));
-        UserIngredient userIngredient = new UserIngredient(user, ingredient, dto.getQuantity(), dto.getBoughtDate());
+        UserIngredient userIngredient = new UserIngredient(user, ingredient, request.getQuantity(), request.getBoughtDate());
         ingredientRepository.saveUserIngredient(userIngredient);
     }
 
-    @Override
     public boolean IngredientDoesNotExistsByName(String name) {
         return !ingredientRepository.existsByName(name);
     }
 
-    @Override
-    public List<UserIngredientResponse> getAllIngredientsByUserId(Long id) {
-        return ingredientRepository.findUserIngredientsByUserId(1L)
+    public List<UserIngredientResponse> getAllIngredientsByUserId(Long userId) {
+        return ingredientRepository.findUserIngredientsByUserId(userId)
                 .stream()
                 .map(UserIngredientResponse::new)
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public void deleteById(Long id) {
+    public void deleteById(Long ingredientId) {
 
     }
 }
