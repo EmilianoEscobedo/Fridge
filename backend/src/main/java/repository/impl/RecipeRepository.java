@@ -11,7 +11,7 @@ import javax.persistence.EntityManagerFactory;
 import java.util.List;
 import java.util.Optional;
 
-@ApplicationScoped
+//@ApplicationScoped
 public class RecipeRepository implements Repository<Recipe, Long> {
 
     private EntityManagerFactory emf;
