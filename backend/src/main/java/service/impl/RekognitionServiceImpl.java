@@ -48,7 +48,6 @@ public class RekognitionServiceImpl implements RekognitionService {
 
         imageIsAValidTicket(ticket);
         extractIngredientsFromTicket(ticket);
-
     }
 
     @Override
