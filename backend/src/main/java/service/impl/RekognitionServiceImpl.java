@@ -50,11 +50,16 @@ public class RekognitionServiceImpl implements RekognitionService {
         System.out.println("Verifying ticket");
         Image ticket = new Image().withBytes(ByteBuffer.wrap(request.getImage()));
 
+
+        imageIsAValidTicket(ticket);
+        extractIngredientsFromTicket(ticket);
+
         //imageIsAValidTicket(ticket);
         ProcessedTicket processedTicket = extractInformationFromTicket(ticket);
         processedTicket.setUserId(request.getUserId());
 
         System.out.println(processedTicket);
+
     }
 
     @Override
