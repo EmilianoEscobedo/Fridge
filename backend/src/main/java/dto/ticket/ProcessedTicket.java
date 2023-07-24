@@ -13,4 +13,13 @@ public class ProcessedTicket {
     private Long userId;
     private String boughtDate;
     List<UserIngredientDto> ingredients;
+
+    @Override
+    public String toString() {
+        return "ProcessedTicket{" +
+                "\nuserId=" + userId +
+                ",\nboughtDate='" + boughtDate + '\'' +
+                ",\ningredients=" + ingredients +
+                '}';
+    }
 }
