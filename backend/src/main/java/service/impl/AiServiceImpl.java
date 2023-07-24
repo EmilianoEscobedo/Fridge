@@ -13,8 +13,15 @@ import java.net.URL;
 @NoArgsConstructor
 public class AiServiceImpl implements AiService {
 
+    private final String prompt = "Lista de alimentos:" +
+            " respóndeme a cada punto cuál es la palabra que corresponde a un alimento:" +
+            " responde una sola palabra por punto, no hagás aclaraciones" +
+            " en caso de que no reconozcas facilmente amplia coincidencia con un alimento, ignorala, es muy importante." +
+            " en caso de que reconozcás amplia coincidencia con una palabra de alimento pero esté incompleta, completalá" +
+            " la lista es: ";
+
     @Override
-    public String request(String prompt) {
+    public String request(String content) {
         try {
 
             URL serviceUrl = new URL("https://api.openai.com/v1/chat/completions");
@@ -26,7 +33,8 @@ public class AiServiceImpl implements AiService {
             connection.setRequestProperty("Content-Type", "application/json");
 
             String MODEL = "gpt-3.5-turbo";
-            String body = "{\"model\": \"" + MODEL + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + prompt + "\"}]}";
+            System.out.println(prompt + content);
+            String body = "{\"model\": \"" + MODEL + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + prompt + content + "\"}]}";
             connection.setDoOutput(true);
             OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
             writer.write(body);

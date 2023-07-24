@@ -1,12 +1,8 @@
 
 
 import service.AiService;
-import service.impl.AiServiceImpl;
+import service.impl.*;
 import service.RekognitionService;
-import service.impl.IngredientServiceImpl;
-import service.impl.RecipeServiceImpl;
-import service.impl.RekognitionServiceImpl;
-import service.impl.UserServiceImpl;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -17,14 +13,13 @@ public class Main {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
 
-
+        TicketServiceImpl ticketService = new TicketServiceImpl();
+        ticketService.processTicket(ticketService.mockRequest());
         /*Endpoint.publish("http://localhost:8080/users", new UserServiceImpl());
         Endpoint.publish("http://localhost:8080/ingredients", new IngredientServiceImpl());
         Endpoint.publish("http://localhost:8080/recipes", new RecipeServiceImpl());*/
 
-        RekognitionServiceImpl rekognition = new RekognitionServiceImpl();
-        rekognition.handleRequest(rekognition.mockRequest());
-
+        /*
         AiService service = new AiServiceImpl();
 
         System.out.println(service.request("Lista de alimentos:" +
@@ -44,6 +39,8 @@ public class Main {
                 "9. 009687 CHOCLO CRE-" +
                 "10. 330548 TE CARREFO" +
                 "11. 345194 PURE CARRE"));
+
+         */
         emf.close();
     }
 }
